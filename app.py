@@ -37,8 +37,8 @@ def search_roles():
 
 if __name__ == '__main__':
     # development
-    app.run(debug=True)
+    # app.run(debug=True)
 
     # production
-    # server = pywsgi.WSGIServer(('0.0.0.0', 5000), app)
-    # server.serve_forever()
+    server = pywsgi.WSGIServer(('0.0.0.0', 80), app)
+    server.serve_forever()
