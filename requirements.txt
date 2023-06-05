@@ -1,4 +1,4 @@
 faiss-cpu==1.7.4
 flask==2.3.2
-gevent==22.10.0
+gevent==22.10.2
 sentence_transformers==2.2.2
