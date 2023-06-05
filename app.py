@@ -1,3 +1,4 @@
+# encoding: utf-8
 import json
 from gevent import pywsgi
 import faiss_vdb as vdb
