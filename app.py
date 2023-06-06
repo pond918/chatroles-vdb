@@ -21,6 +21,7 @@ i_upsert = gr.Interface(fn=upsert_role, inputs=["text", "json"],
 
 def search_roles(content, size):
     if size is None: size = 4
+    size = int(size)
     text = json.dumps(content)
     docs = vdb.search(text, size)
     return docs

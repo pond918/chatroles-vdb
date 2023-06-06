@@ -12,13 +12,13 @@ db = FAISS.load_local(db_path, embeddings) if os.path.exists(
     db_path) else FAISS.from_texts([''], embeddings)
 
 
-def upsert(text, meta):
+async def upsert(text, meta):
     """
     Args:
             text: string
             meta: dict, must contain id.
     """
-    db.aadd_texts([text], metadatas=[meta], ids=[meta['id']])
+    await db.aadd_texts([text], metadatas=[meta], ids=[meta['id']])
     db.save_local(db_path)
 
 
