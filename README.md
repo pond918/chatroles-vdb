@@ -34,3 +34,11 @@ curl -X POST -H 'Content-type: application/json' --data '{ "data": ["Jill111", {
 ```shell
 curl -X POST -H 'Content-type: application/json' --data '{ "data": [{"goal": "for test", "skills": [ "for test skills 10 chars least." ] }, 3] }' http://127.0.0.1:7860/run/predict_1
 ```
+
+## online test
+
+```shell
+curl -X POST -H 'Content-type: application/json'  -H 'Authorization: Bearer xxxxxxx' --data '{ "data": ["Jill1", { "meta": {"id":"Jill1", "nick":"erer"}, "content": {"goal": "for test", "skills": [ "for test skills 10 chars least." ] } }] }' https://thisis-it-chatroles-vdb.hf.space/run/predict
+curl -X POST -H 'Content-type: application/json'  -H 'Authorization: Bearer xxxxxxx' --data '{ "data": [{"goal": "for test", "skills": [ "for test skills 10 chars least." ] }, 3] }' https://thisis-it-chatroles-vdb.hf.space/run/predict_1
+
+```

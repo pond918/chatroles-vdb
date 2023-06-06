@@ -9,9 +9,9 @@ def upsert_role(roleId, data):
     text = json.dumps(data['content'])
     meta = data['meta']
     meta['id'] = roleId
-    vdb.upsert(text, meta)
+    cnt = vdb.upsert(text, meta)
 
-    return 'true'
+    return cnt
 
 
 i_upsert = gr.Interface(fn=upsert_role, inputs=["text", "json"],
