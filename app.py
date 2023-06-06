@@ -1,45 +1,39 @@
-# encoding: utf-8
+import gradio as gr
 import json
-from gevent import pywsgi
 import faiss_vdb as vdb
 
-from flask import (
-    Flask,
-    request
-)
-
-app = Flask(__name__)
-
-
-@app.route('/api/roles', methods=['PATCH'])
-def upsert_role():
+def upsert_role(roleId, data):
     """
     body: { meta, content }
     """
-    roleId = request.args.get('id')
-    data = request.json
-
     text = json.dumps(data['content'])
     meta = data['meta']
     meta['id'] = roleId
     vdb.upsert(text, meta)
 
-    return 'ok'
+    return 'true'
 
 
-@app.route('/api/roles/search', methods=['GET'])
-def search_roles():
-    size = request.args.get('size')
-    data = request.json
-    text = json.dumps(data)
+i_upsert = gr.Interface(fn=upsert_role, inputs=["text", "json"],
+                       outputs="text")
+# gradio_interface.launch()
+
+
+def search_roles(content, size):
+    if size is None: size = 4
+    text = json.dumps(content)
     docs = vdb.search(text, size)
     return docs
 
 
-if __name__ == '__main__':
-    # development
-    # app.run(debug=True)
+i_search = gr.Interface(
+    fn=search_roles,
+    inputs=["json", "number"],
+    outputs="json"
+)
 
-    # production
-    server = pywsgi.WSGIServer(('0.0.0.0', 80), app)
-    server.serve_forever()
+demo = gr.TabbedInterface([i_upsert, i_search], [
+                          "upsert role", "search roles"])
+
+if __name__ == "__main__":
+    demo.launch()

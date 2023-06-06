@@ -18,12 +18,11 @@ def upsert(text, meta):
             text: string
             meta: dict, must contain id.
     """
-    db.add_texts([text], metadatas=[meta], ids=[meta['id']])
+    db.aadd_texts([text], metadatas=[meta], ids=[meta['id']])
     db.save_local(db_path)
 
 
-def search(text, size):
-    if not size: size = 4
+def search(text, size=4):
     docs = db.similarity_search(text, size)
     data = [doc.metadata for doc in docs if ('id' in doc.metadata)]
     return data

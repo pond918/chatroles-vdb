@@ -1,3 +1,5 @@
 # chat-roles vector database
 
-a vdb to store/search all chat-roles.
+a gradio based vdb to store/search all chat-roles.
+
+easy to deploy on huggingface
