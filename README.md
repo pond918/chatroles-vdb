@@ -35,6 +35,12 @@ curl -X POST -H 'Content-type: application/json' --data '{ "data": ["Jill111", {
 curl -X POST -H 'Content-type: application/json' --data '{ "data": [{"goal": "for test", "skills": [ "for test skills 10 chars least." ] }, 3] }' http://127.0.0.1:7860/run/predict_1
 ```
 
+### embed text array to vectors
+
+```shell
+curl -X POST -H 'Content-type: application/json' --data '{ "data": [["Jill","haha"]] }' https://127.0.0.1:7860/run/predict_2
+```
+
 ## online test
 
 ```shell
