@@ -76,7 +76,7 @@ def clear_existing(id):
 
 
 def embed_text(txt):
-    emb = [db.embedding_function()]
+    emb = [db.embedding_function(txt)]
     vector = np.array(emb, dtype=np.float32)
     if db._normalize_L2:
         faiss = db.dependable_faiss_import()
