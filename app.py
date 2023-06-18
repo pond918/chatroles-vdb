@@ -33,8 +33,20 @@ i_search = gr.Interface(
     outputs="json"
 )
 
-demo = gr.TabbedInterface([i_upsert, i_search], [
-                          "upsert role", "search roles"])
+
+def embed_texts(texts):
+    arr = [vdb.embed_text(t)[0].tolist() for t in texts]
+    json_arr = json.dumps(arr)
+    return json_arr
+
+i_embed = gr.Interface(
+    fn=embed_texts,
+    inputs='json',
+    outputs="json"
+)
+
+demo = gr.TabbedInterface([i_upsert, i_search, i_embed], [
+                          "upsert role", "search roles", "embed text"])
 
 if __name__ == "__main__":
     demo.launch()
